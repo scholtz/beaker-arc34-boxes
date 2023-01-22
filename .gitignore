@@ -1,0 +1,9 @@
+node_modules
+cache
+.VSCodeCounter/
+*.code-workspace
+.env*
+*.pyc
+orderAppIds.txt
+orderbook.png
+orderbook.dot

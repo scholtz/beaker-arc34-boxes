@@ -1,0 +1,671 @@
+#pragma version 8
+intcblock 0 65536 1
+bytecblock 0x3b 0x 0x656e644f6646697273745068617365 0x70449ed5fc03ab86e83063afbcdc385e29ab1132b26e80a00c0a5dcffb3efabd
+txn NumAppArgs
+intc_0 // 0
+==
+bnz main_l12
+txna ApplicationArgs 0
+pushbytes 0x3c7794c6 // "setup(account,uint64,uint64)void"
+==
+bnz main_l11
+txna ApplicationArgs 0
+pushbytes 0x3e14c509 // "setup2ndRound(string)void"
+==
+bnz main_l10
+txna ApplicationArgs 0
+pushbytes 0xadb2ff65 // "setEncryptedRecord(byte[],byte[],byte[],byte[])void"
+==
+bnz main_l9
+txna ApplicationArgs 0
+pushbytes 0xbb585bc4 // "delEncryptedRecord()void"
+==
+bnz main_l8
+txna ApplicationArgs 0
+pushbytes 0x7cffb3ca // "decryptAccount(account,string,string,string,string,string,string,string,uint64,string,string,string,string)void"
+==
+bnz main_l7
+err
+main_l7:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+intc_0 // 0
+getbyte
+store 7
+txna ApplicationArgs 2
+store 8
+txna ApplicationArgs 3
+store 9
+txna ApplicationArgs 4
+store 10
+txna ApplicationArgs 5
+store 11
+txna ApplicationArgs 6
+store 12
+txna ApplicationArgs 7
+store 13
+txna ApplicationArgs 8
+store 14
+txna ApplicationArgs 9
+btoi
+store 15
+txna ApplicationArgs 10
+store 16
+txna ApplicationArgs 11
+store 17
+txna ApplicationArgs 12
+store 18
+txna ApplicationArgs 13
+store 19
+load 7
+load 8
+load 9
+load 10
+load 11
+load 12
+load 13
+load 14
+load 15
+load 16
+load 17
+load 18
+load 19
+callsub decryptAccount_8
+intc_2 // 1
+return
+main_l8:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub delEncryptedRecord_7
+intc_2 // 1
+return
+main_l9:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+store 3
+txna ApplicationArgs 2
+store 4
+txna ApplicationArgs 3
+store 5
+txna ApplicationArgs 4
+store 6
+load 3
+load 4
+load 5
+load 6
+callsub setEncryptedRecord_6
+intc_2 // 1
+return
+main_l10:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+callsub setup2ndRound_5
+intc_2 // 1
+return
+main_l11:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+intc_0 // 0
+getbyte
+store 0
+txna ApplicationArgs 2
+btoi
+store 1
+txna ApplicationArgs 3
+btoi
+store 2
+load 0
+load 1
+load 2
+callsub setup_4
+intc_2 // 1
+return
+main_l12:
+txn OnCompletion
+intc_0 // NoOp
+==
+bnz main_l14
+err
+main_l14:
+txn ApplicationID
+intc_0 // 0
+==
+assert
+callsub create_0
+intc_2 // 1
+return
+
+// create
+create_0:
+proto 0 0
+retsub
+
+// auth_only
+authonly_1:
+proto 1 1
+frame_dig -1
+global CreatorAddress
+==
+retsub
+
+// auth_only
+authonly_2:
+proto 1 1
+frame_dig -1
+global CreatorAddress
+==
+retsub
+
+// auth_only
+authonly_3:
+proto 1 1
+frame_dig -1
+global CreatorAddress
+==
+retsub
+
+// setup
+setup_4:
+proto 3 0
+txn Sender
+callsub authonly_1
+// unauthorized
+assert
+intc_2 // 1
+return
+
+// setup2ndRound
+setup2ndRound_5:
+proto 1 0
+txn Sender
+callsub authonly_2
+// unauthorized
+assert
+global Round
+bytec_2 // "endOfFirstPhase"
+app_global_get
+>=
+assert
+intc_2 // 1
+return
+
+// setEncryptedRecord
+setEncryptedRecord_6:
+proto 4 0
+bytec_1 // ""
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+frame_dig -4
+frame_bury 4
+frame_dig 4
+frame_bury 3
+pushint 8 // 8
+frame_bury 1
+frame_dig 1
+frame_dig 4
+len
++
+frame_bury 2
+frame_dig 2
+intc_1 // 65536
+<
+assert
+frame_dig 1
+itob
+extract 6 0
+frame_dig -3
+frame_bury 4
+frame_dig 3
+frame_dig 4
+concat
+frame_bury 3
+frame_dig 2
+frame_bury 1
+frame_dig 1
+frame_dig 4
+len
++
+frame_bury 2
+frame_dig 2
+intc_1 // 65536
+<
+assert
+frame_dig 1
+itob
+extract 6 0
+concat
+frame_dig -2
+frame_bury 4
+frame_dig 3
+frame_dig 4
+concat
+frame_bury 3
+frame_dig 2
+frame_bury 1
+frame_dig 1
+frame_dig 4
+len
++
+frame_bury 2
+frame_dig 2
+intc_1 // 65536
+<
+assert
+frame_dig 1
+itob
+extract 6 0
+concat
+frame_dig -1
+frame_bury 4
+frame_dig 3
+frame_dig 4
+concat
+frame_bury 3
+frame_dig 2
+frame_bury 1
+frame_dig 1
+itob
+extract 6 0
+concat
+frame_dig 3
+concat
+frame_bury 0
+txn Sender
+box_del
+pop
+txn Sender
+frame_dig 0
+box_put
+frame_dig -1
+extract 2 0
+bytec_3 // 0x70449ed5fc03ab86e83063afbcdc385e29ab1132b26e80a00c0a5dcffb3efabd
+==
+assert
+intc_2 // 1
+return
+
+// delEncryptedRecord
+delEncryptedRecord_7:
+proto 0 0
+global Round
+bytec_2 // "endOfFirstPhase"
+app_global_get
+<=
+assert
+retsub
+
+// decryptAccount
+decryptAccount_8:
+proto 13 0
+bytec_1 // ""
+dupn 2
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+txn Sender
+callsub authonly_3
+// unauthorized
+assert
+frame_dig -13
+txnas Accounts
+box_get
+store 21
+store 20
+load 21
+assert
+load 20
+frame_bury 0
+bytec_1 // ""
+frame_bury 1
+frame_dig 1
+len
+itob
+extract 6 0
+frame_dig 1
+concat
+frame_bury 1
+frame_dig 0
+frame_dig 0
+pushint 6 // 6
+extract_uint16
+dig 1
+len
+substring3
+frame_bury 1
+frame_dig 1
+extract 2 0
+bytec_3 // 0x70449ed5fc03ab86e83063afbcdc385e29ab1132b26e80a00c0a5dcffb3efabd
+==
+assert
+frame_dig -12
+extract 2 0
+bytec_0 // ";"
+concat
+frame_dig -11
+extract 2 0
+concat
+bytec_0 // ";"
+concat
+frame_dig -10
+extract 2 0
+concat
+bytec_0 // ";"
+concat
+frame_dig -9
+extract 2 0
+concat
+bytec_0 // ";"
+concat
+frame_dig -8
+extract 2 0
+concat
+bytec_0 // ";"
+concat
+frame_dig -7
+extract 2 0
+concat
+bytec_0 // ";"
+concat
+frame_dig -6
+extract 2 0
+concat
+bytec_0 // ";"
+concat
+frame_dig -5
+itob
+concat
+bytec_0 // ";"
+concat
+frame_dig -4
+extract 2 0
+concat
+bytec_0 // ";"
+concat
+frame_dig -3
+extract 2 0
+concat
+bytec_0 // ";"
+concat
+frame_dig -2
+extract 2 0
+concat
+bytec_0 // ";"
+concat
+frame_dig -1
+extract 2 0
+concat
+sha256
+frame_dig 1
+extract 2 0
+==
+assert
+frame_dig -12
+frame_bury 6
+frame_dig 6
+frame_bury 5
+pushint 30 // 30
+frame_bury 3
+frame_dig 3
+frame_dig 6
+len
++
+frame_bury 4
+frame_dig 4
+intc_1 // 65536
+<
+assert
+frame_dig 3
+itob
+extract 6 0
+frame_dig -11
+frame_bury 6
+frame_dig 5
+frame_dig 6
+concat
+frame_bury 5
+frame_dig 4
+frame_bury 3
+frame_dig 3
+frame_dig 6
+len
++
+frame_bury 4
+frame_dig 4
+intc_1 // 65536
+<
+assert
+frame_dig 3
+itob
+extract 6 0
+concat
+frame_dig -10
+frame_bury 6
+frame_dig 5
+frame_dig 6
+concat
+frame_bury 5
+frame_dig 4
+frame_bury 3
+frame_dig 3
+frame_dig 6
+len
++
+frame_bury 4
+frame_dig 4
+intc_1 // 65536
+<
+assert
+frame_dig 3
+itob
+extract 6 0
+concat
+frame_dig -9
+frame_bury 6
+frame_dig 5
+frame_dig 6
+concat
+frame_bury 5
+frame_dig 4
+frame_bury 3
+frame_dig 3
+frame_dig 6
+len
++
+frame_bury 4
+frame_dig 4
+intc_1 // 65536
+<
+assert
+frame_dig 3
+itob
+extract 6 0
+concat
+frame_dig -8
+frame_bury 6
+frame_dig 5
+frame_dig 6
+concat
+frame_bury 5
+frame_dig 4
+frame_bury 3
+frame_dig 3
+frame_dig 6
+len
++
+frame_bury 4
+frame_dig 4
+intc_1 // 65536
+<
+assert
+frame_dig 3
+itob
+extract 6 0
+concat
+frame_dig -7
+frame_bury 6
+frame_dig 5
+frame_dig 6
+concat
+frame_bury 5
+frame_dig 4
+frame_bury 3
+frame_dig 3
+frame_dig 6
+len
++
+frame_bury 4
+frame_dig 4
+intc_1 // 65536
+<
+assert
+frame_dig 3
+itob
+extract 6 0
+concat
+frame_dig -6
+frame_bury 6
+frame_dig 5
+frame_dig 6
+concat
+frame_bury 5
+frame_dig 4
+frame_bury 3
+frame_dig 3
+frame_dig 6
+len
++
+frame_bury 4
+frame_dig 4
+intc_1 // 65536
+<
+assert
+frame_dig 3
+itob
+extract 6 0
+concat
+frame_dig -5
+itob
+concat
+frame_dig -4
+frame_bury 6
+frame_dig 5
+frame_dig 6
+concat
+frame_bury 5
+frame_dig 4
+frame_bury 3
+frame_dig 3
+frame_dig 6
+len
++
+frame_bury 4
+frame_dig 4
+intc_1 // 65536
+<
+assert
+frame_dig 3
+itob
+extract 6 0
+concat
+frame_dig -3
+frame_bury 6
+frame_dig 5
+frame_dig 6
+concat
+frame_bury 5
+frame_dig 4
+frame_bury 3
+frame_dig 3
+frame_dig 6
+len
++
+frame_bury 4
+frame_dig 4
+intc_1 // 65536
+<
+assert
+frame_dig 3
+itob
+extract 6 0
+concat
+frame_dig -2
+frame_bury 6
+frame_dig 5
+frame_dig 6
+concat
+frame_bury 5
+frame_dig 4
+frame_bury 3
+frame_dig 3
+frame_dig 6
+len
++
+frame_bury 4
+frame_dig 4
+intc_1 // 65536
+<
+assert
+frame_dig 3
+itob
+extract 6 0
+concat
+frame_dig -1
+frame_bury 6
+frame_dig 5
+frame_dig 6
+concat
+frame_bury 5
+frame_dig 4
+frame_bury 3
+frame_dig 3
+itob
+extract 6 0
+concat
+frame_dig 5
+concat
+frame_bury 2
+txn Sender
+box_del
+pop
+txn Sender
+frame_dig 2
+box_put
+intc_2 // 1
+return

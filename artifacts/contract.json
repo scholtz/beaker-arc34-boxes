@@ -1,0 +1,129 @@
+{
+    "name": "ARC34Application",
+    "methods": [
+        {
+            "name": "setup",
+            "args": [
+                {
+                    "type": "account",
+                    "name": "encryptionAddress"
+                },
+                {
+                    "type": "uint64",
+                    "name": "endOfFirstPhase"
+                },
+                {
+                    "type": "uint64",
+                    "name": "endOfSecondPhase"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "setup2ndRound",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "encryptionSk"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "setEncryptedRecord",
+            "args": [
+                {
+                    "type": "byte[]",
+                    "name": "nonce"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "otPK"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "ct"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "hash"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "delEncryptedRecord",
+            "args": [],
+            "returns": {
+                "type": "void"
+            }
+        },
+        {
+            "name": "decryptAccount",
+            "args": [
+                {
+                    "type": "account",
+                    "name": "account"
+                },
+                {
+                    "type": "string",
+                    "name": "Title"
+                },
+                {
+                    "type": "string",
+                    "name": "ProposerEmail"
+                },
+                {
+                    "type": "string",
+                    "name": "CompanyName"
+                },
+                {
+                    "type": "string",
+                    "name": "Team"
+                },
+                {
+                    "type": "string",
+                    "name": "ExperienceOnAlgorand"
+                },
+                {
+                    "type": "string",
+                    "name": "Category"
+                },
+                {
+                    "type": "string",
+                    "name": "Area"
+                },
+                {
+                    "type": "uint64",
+                    "name": "AmountRequested"
+                },
+                {
+                    "type": "string",
+                    "name": "RoapMap"
+                },
+                {
+                    "type": "string",
+                    "name": "Details"
+                },
+                {
+                    "type": "string",
+                    "name": "URL"
+                },
+                {
+                    "type": "string",
+                    "name": "PitchVideo"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        }
+    ],
+    "networks": {}
+}
