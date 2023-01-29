@@ -12,7 +12,7 @@ A valid submission will include the source code via a Github repository linked t
 
 Application allows algorand foundation to deploy and configure the smart contract.
 
-Configuration consists of selecting encryption address, end round of period 1 and end round of period 2. 
+Configuration consists of selecting encryption address, end round of period 1 and end round of period 2.
 
 Each person who wish to receive grant for his projects has to submit request for grant. User submits the request in encrypted form using Curve25519XSalsa20Poly1305.
 
@@ -20,7 +20,7 @@ After end of round 1, foundation will publish encryption mnemonic so that all re
 
 Part of this solution is not the UI, but it cosists of full SDK api calls in typescript and high test coverage.
 
-This solution demonstrates how to use boxes and not to rely on user to opt in into application. 
+This solution demonstrates how to use boxes and not to rely on user to opt in into application.
 
 ## Dependencies
 
@@ -51,3 +51,7 @@ source .env.test && export $(sed '/^#/d' .env.test | cut -d= -f1)
 ```
 ./run.sh
 ```
+
+## Encryption
+
+Testcase encryption.test shows the exact process on how to encrypt using Curve25519 public key and decrypt using mnemonic.

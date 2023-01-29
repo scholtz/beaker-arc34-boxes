@@ -1,0 +1,7 @@
+@startgantt
+[Grant requests] lasts 30 days
+[XGov votes] lasts 30 days
+[Decision] lasts 15 days
+[XGov votes] starts at [Grant requests]'s end
+[Decision] starts at [XGov votes]'s end
+@endgantt
